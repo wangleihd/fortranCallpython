@@ -5,19 +5,13 @@ LFLAGS = -L/usr/local/lib -lpython2.7 -lm
 
 .PHONY: all clean
 
-all: rootF main
+all: main
 
-rootF: rootF.o rootC.o
+main: rootF.o rootC.o
 	$(FC) $^ -o $@ $(LFLAGS)
 
 rootF.o: fcallpy.f95
 	$(FC) -c $< -o $@
-
-main: main.o rootC.o
-	$(CC) $^ -o $@ $(LFLAGS)
-
-main.o: main.c
-	$(CC) $(CFLAGS) -c $< -o $@
 
 rootC.o: root.c
 	$(CC) $(CFLAGS) -c $< -o $@

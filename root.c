@@ -26,7 +26,7 @@ double* listTOarray(PyObject* pValue) {
         p = NULL;
     }
 
-    return 1;
+    return NULL;
 }
 
 void root_(double* A, double* B, double* y, double* x) {
@@ -59,21 +59,10 @@ void root_(double* A, double* B, double* y, double* x) {
     PyTuple_SetItem(pArgs, 1, PyFloat_FromDouble((*B)));
     // PyTuple_SetItem(pArgs, 2, PyFloat_FromDouble((*t)));
 
-    //	pValue = PyObject_CallObject(pFunc, pArgs);
-    //	*x  = PyFloat_AsDouble(pValue);
+    	pValue = PyObject_CallObject(pFunc, pArgs);
+    	*y  = PyFloat_AsDouble(pValue);
     // call python function
-    pValue = PyObject_CallObject(pFunc, pArgs);
-    if (pValue == NULL) {
-        printf("CalllObject return NULL");
-        exit(1);
-    }
-
-    char* ret_str;
-    int w = 0, h = 0;
-    //解析元组
-    PyArg_ParseTuple(pValue, "s,i,i", &ret_str, &w, &h);
-
-    printf("%s, %d, %d\n", ret_str, w, h);
+    //printf("%s, %d, %d\n", ret_str, w, h);
     //*y  = PyFloat_AsDouble(pValue);
-    *x = listTOarray(pValue);
+//    x = listTOarray(pValue);
 }
